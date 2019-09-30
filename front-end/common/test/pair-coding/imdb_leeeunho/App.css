@@ -1,0 +1,49 @@
+.Header {
+  background : gray;
+  color : black;
+  font-size : 20px;
+  padding : 1rem;
+  font-weight : 600;
+}
+
+#logo{
+  vertical-align: middle;
+  float : left;
+}
+
+.inputForm{
+  float:right;
+}
+
+.clear{
+  clear:both;
+}
+
+.optionList{
+  height : 20px;
+}
+.body{
+  height: 500px;
+}
+table {
+  width: 200px;
+  border: 1px solid #444444;
+  float :right;
+  border-collapse: collapse;
+}
+tbody{
+  display: none;
+}
+th,td {
+  width: 200px;
+  border: 1px solid #444444;
+}
+.filterInfo{
+  height : 20px;
+}
+#searchBar{
+  background : white;
+  color : black;
+  resize : none;
+  border-radius: 10px;
+}
