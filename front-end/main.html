@@ -1,0 +1,849 @@
+<!doctype html>
+<html>
+<head>
+<style>
+body {
+    margin: 0;
+    background-color: #3f3f3f;
+}
+#top {
+    display: flex;
+    height: 50px;
+    background-color: #1d1d1d;
+}
+#top > input {
+    background-color: #3f3f3f;
+    color: white;
+    width: 15%;
+    margin: 10px 10px 10px auto;
+    border: 0px;
+    padding: 10px;
+    border-radius: 10px;
+}
+#view {
+    display: flex;
+    flex-wrap: wrap;
+}
+#view > figure {
+    width: 10%;
+}
+#view > figure > img {
+    opacity: 1;
+    width: 100%;
+    box-shadow: 5px 5px black;
+    transition: .1s ease-in-out;
+}
+#view > figure:hover > img {
+    opacity: .5;
+}
+#view > figure > figcaption {
+    color: white;
+    margin-top: 10px;
+    text-align: center;
+}
+
+.episode {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+}
+
+.episode-item {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+</style>
+</head>
+<body>
+<section id="top">
+    <input type="text" name="search" placeholder="Search" onkeydown="search(this)">
+</section>
+<section id="view">
+</section>
+<script>
+let metadata = {
+  "tt4574334": {
+    "type": "TV Series",
+    "title": "Stranger Things",
+    "year": "2016",
+    "synopsis": "When a young boy disappears, his mother, a police chief, and his friends must confront terrifying supernatural forces in order to get him back.",
+    "genres": [
+      "Drama",
+      "Fantasy",
+      "Horror"
+    ],
+    "thumb_url": "https://m.media-amazon.com/images/M/MV5BZGExYjQzNTQtNGNhMi00YmY1LTlhY2MtMTRjODg3MjU4YTAyXkEyXkFqcGdeQXVyMTkxNjUyNQ@@._V1_SY132_CR0,0,89,132_AL_.jpg",
+    "rating": "8.8",
+    "directors": [
+      "Matt Duffer",
+      "Ross Duffer",
+      "Shawn Levy",
+      "Andrew Stanton",
+      "Uta Briesewitz",
+      "Rebecca Thomas"
+    ],
+    "actors": [
+      "Winona Ryder",
+      "David Harbour",
+      "Finn Wolfhard",
+      "Millie Bobby Brown",
+      "Caleb McLaughlin",
+      "Natalia Dyer",
+      "Charlie Heaton",
+      "Joe Keery",
+      "Cara Buono",
+      "Gaten Matarazzo",
+      "Noah Schnapp",
+      "Dacre Montgomery",
+      "Sadie Sink",
+      "Joe Chrest",
+      "Rob Morgan",
+      "John Reynolds",
+      "Priah Ferguson",
+      "Matthew Modine",
+      "Randy Havens",
+      "Sean Astin",
+      "Paul Reiser",
+      "Susan Shalhoub Larkin",
+      "Tinsley Price",
+      "Maya Hawke",
+      "Brett Gelman",
+      "Catherine Curtin",
+      "Andrey Ivchenko",
+      "Chester Rushing",
+      "Anniston Price",
+      "Mark Steger",
+      "Shannon Purser",
+      "Aimee Mullins",
+      "Francesca Reale",
+      "Tobias Jelinek",
+      "Chelsea Talmadge",
+      "Jake Busey",
+      "Cary Elwes",
+      "Michael Park",
+      "Catherine Dyer",
+      "Peyton Wich",
+      "Ross Partridge",
+      "Peggy Miley",
+      "Alec Utgoff",
+      "Hugh B. Holub",
+      "Cynthia Barrett",
+      "Caroline Arapoglou",
+      "Cade Jones",
+      "Joe Davison",
+      "Charles Lawlor",
+      "Holly A. Morris",
+      "Robert Walker Branchaud",
+      "Olan Montgomery",
+      "Tony Vaughn",
+      "Linnea Berthelsen",
+      "Pete Burris",
+      "Andrew Benator",
+      "Glennellen Anderson",
+      "Amy Seimetz",
+      "Anthony Belevtsov",
+      "Chantell D. Christopher",
+      "Matty Cardarople",
+      "Drew Scheid",
+      "Will Chase",
+      "Helen Abell",
+      "Brian Brightman",
+      "Chris Sullivan",
+      "Kristopher Charles",
+      "Kai Greene",
+      "Stefanie Butler",
+      "James Landry Hébert",
+      "David Dwyer",
+      "Anna Jacoby-Heron",
+      "Pruitt Taylor Vince",
+      "Sam Ashby",
+      "Gabrielle Maiden",
+      "Lynne Ashe",
+      "Salem Murphy",
+      "Allyssa Brooke",
+      "Danny Boyd Jr.",
+      "Jennifer Marshall",
+      "Jerri Tubbs",
+      "Sydney Bullock",
+      "Erika Coleman",
+      "Karen Ceesay",
+      "Ron Roggé",
+      "Alan Boell",
+      "Paul Vincent Freeman",
+      "Georgui Kasaev",
+      "Greta Glenn",
+      "Aleh Neliubin",
+      "Abigail Cowen",
+      "Christi Waldon",
+      "Madelyn Cline",
+      "Nita Hardy",
+      "Cameron Newton",
+      "Donna Wright",
+      "David A MacDonald",
+      "Leiloni Arrie Pharms",
+      "Cara Mantella",
+      "Aaron Munoz",
+      "Andrew Wilson Williams",
+      "Lauren Revard",
+      "Avis-Marie Barnes",
+      "Beth Riesgraf",
+      "Vanathi Parthiban",
+      "Shae Britt",
+      "Lucius Baston",
+      "Danny Boushebel",
+      "Jackie Dallas",
+      "Christopher Convery",
+      "Jason Davis",
+      "Arthur Darbinyan",
+      "Arthur Lee Dozier",
+      "Charles Green",
+      "Gabriella Pizzolo",
+      "Adam Boyer",
+      "Bill Eudaly",
+      "Ron Fallica",
+      "Elle Graham",
+      "Marianne Fraulo",
+      "Kaylee Glover",
+      "James DuMont",
+      "Mo Anouti",
+      "Yasen Peyankov",
+      "Adam Gagan",
+      "Amy Parrish",
+      "Sheena Kharazmi",
+      "Alexander Babara",
+      "Misha Kuznetsov",
+      "Miles Mussenden",
+      "Kerry Cahill",
+      "Mary Kraft",
+      "Nikita Bogolyubov",
+      "Nodir Buriev",
+      "Nicholas Cirillo",
+      "Evan Brinkman",
+      "Harper Cavanaugh",
+      "Brian Lafontaine",
+      "Angie Dillard",
+      "Tonya Bludsworth",
+      "Wendel A. Matthews",
+      "Michael Brooks",
+      "Kyle Dixon",
+      "Suehyla El-Attar",
+      "Michael Silvio Fortino",
+      "Megan Hayes",
+      "John Mangan",
+      "Linda Kang",
+      "Jon Kohler",
+      "Bethany Anne Lind",
+      "Andre Pushkin",
+      "Keith Brooks",
+      "Cory Chapman",
+      "Bethany DeZelle",
+      "Brandon O'Dell",
+      "Alexander Chernyshev",
+      "Dean Grimes",
+      "Michael Hickey",
+      "Kaiser Johnson",
+      "Jennifer A. Martin",
+      "Shawn Levy",
+      "Kevin Patrick Murphy",
+      "Marcelle LeBlanc",
+      "Vince Pisani",
+      "Chris Burndrett",
+      "Daryn Kahn",
+      "Yevgeniy Kartashov",
+      "Serge Levin",
+      "Aaron Matthews",
+      "Cody Robinson",
+      "Jarrett Michael Collins",
+      "Suzanne Jordan Roush",
+      "Michael Shenefelt",
+      "Dinarte de Freitas",
+      "Scott Deckert",
+      "Leon Mandel",
+      "Sean McCracken",
+      "Sierra Rae",
+      "Abigail Whitlock",
+      "Jim E. Chandler",
+      "Virginia Kirby",
+      "Lee Ellis",
+      "Pat Gallaher",
+      "Abby Glover",
+      "John Mullins",
+      "Dan Triandiflou",
+      "Paul Ryden",
+      "Arnell Powell",
+      "Orelon Sidney",
+      "Thomas Tull",
+      "Samuel Goergen",
+      "Kristof Reinharz",
+      "Anthony Reynolds",
+      "Gilbert Glenn Brown",
+      "Wes Kidd",
+      "Ben Taylor",
+      "Evgeny Krutov",
+      "Cason Richter",
+      "Zack Sayenko",
+      "Chase Stokes",
+      "Shea Jones",
+      "Pj McDonnell",
+      "A. Smith Harrison",
+      "Healy Lange",
+      "Sophie Levy",
+      "Brandon Sauve",
+      "Michael Stein",
+      "Mark Withers",
+      "John Paul Marston",
+      "Kenny Lambert",
+      "Andrei Lapionak",
+      "Roman Varshavsky",
+      "Sean Michael Weber",
+      "Shannon Mayers",
+      "Zac Zedalis",
+      "Brenda Wood",
+      "Brian F. Durkin",
+      "Al Mitchell",
+      "Dylan Gage",
+      "Amanda McLean",
+      "Jacey Sink",
+      "Drew Youngblood",
+      "Lauren Halperin",
+      "Desmond Phillips",
+      "Christopher Johnson",
+      "Cody Pressley",
+      "Fenton Lawless",
+      "David Silverman",
+      "John Vodka",
+      "Alex Van",
+      "Susan Williams",
+      "Ricardo Miguel Young",
+      "Jim Heard",
+      "Noah Hein",
+      "Warren Quandt",
+      "Camden Ella Brown",
+      "Andy Morales",
+      "John Archer Lundgren",
+      "Stephen Dean",
+      "J.T. Blair",
+      "Trey McGriff",
+      "Jack Kidd",
+      "Skyler Knight",
+      "Mikayla Fields",
+      "Isabel Chanel Freeman",
+      "Alex Hargett",
+      "Aiden Hattier",
+      "Daniel Martinez",
+      "Stephen M. LaBar Jr.",
+      "Ryder Morlong",
+      "Melissa Collazo",
+      "Carissa Mejias",
+      "J. Gaven Wilde",
+      "Alayna Burgess",
+      "Robert Tinsley",
+      "Joseph Velez",
+      "Brady Rogers",
+      "Ashley Windham",
+      "Owen Beam",
+      "Fernando Campos",
+      "Philip Dido",
+      "Shelby Christine Freeman",
+      "Walter Hendrix III",
+      "Daniel Jarvie",
+      "Jaxon McHan",
+      "Max Perethian",
+      "Julaine Tackett",
+      "James Michael Smith",
+      "Gennaro Napolitano",
+      "Alicia Shenreice",
+      "Anna Swiney",
+      "Tyler Boronski",
+      "Charles Casey",
+      "Kendall Denise Clark",
+      "Chris Jablon",
+      "Jay D. Kacho",
+      "Cailyn Peddle",
+      "Shawn South",
+      "William Walker",
+      "Alex Zelenka",
+      "Anastasia Bastien",
+      "Jb Blaine",
+      "Judy McGee Burley",
+      "Marshall Choka",
+      "Stephen Conroy",
+      "Marisol Correa",
+      "Gordon Dillard Jr.",
+      "Mikey Evgen",
+      "Daniel Guttenberg",
+      "Bradford Haynes",
+      "Rory Healy",
+      "Tabitha Kilgore",
+      "Jesse Kindred",
+      "Christopher Ryan Lewis",
+      "Shane Donovan Lewis",
+      "Daniel McGraw",
+      "Ryan Newton",
+      "Lourenz Oviedo",
+      "Bobby Pizer",
+      "Anthony Porrey",
+      "Cade Shepard",
+      "Terry Thomas",
+      "Jaye Tyroff",
+      "Andrew Ward",
+      "Tara Wescott",
+      "Rachel Marie Wilson",
+      "John Jacob Anderson",
+      "Angelo Bash",
+      "Jasmine Bolton",
+      "Max Calder",
+      "Olivia De Paux",
+      "Emma Dempster",
+      "Emma Faith",
+      "Sharon Frank",
+      "Shawron Gaffney",
+      "Juan Gaspard",
+      "Apollo GT",
+      "Robert Hatch",
+      "Lindsey Heilman",
+      "Audrey Hope",
+      "John Kaler",
+      "Gage Lawson",
+      "William Mahnken",
+      "Jalen Major",
+      "Jace Marsh",
+      "Sage Mayer",
+      "Stephanie Mikel",
+      "Kara Mullins",
+      "Mary Murdock",
+      "Keith Nussbaum",
+      "Ian O'Neil",
+      "Allen Parker",
+      "Edward Parker",
+      "Shelby Sanders",
+      "Blake Sewell",
+      "Muaaz Shakeel",
+      "Matthew Excel Simmons",
+      "Kayla Thompson",
+      "Kaylie Turner",
+      "Gary Lee Vincent",
+      "Kent Wagner",
+      "Perry Zulu Jr.",
+      "Bobby Akers",
+      "Tommy Campbell",
+      "Conrad Carpenter",
+      "Timothy Carr",
+      "Chris Codding",
+      "Jeremy Connell",
+      "Campbell Cox",
+      "Jamieson Deacy",
+      "Matthew Ezell",
+      "Ella Farmer",
+      "John Grimm",
+      "Champ Hollins",
+      "Kevin Kedgley",
+      "Brittany Kelly",
+      "Kevin Kobinsky",
+      "Dakota James Alden Lane",
+      "Brandon Marski",
+      "David Michael-Smith",
+      "Perla Middleton",
+      "Christopher Mullis",
+      "Edward L. Oliver",
+      "Ryan L. Price",
+      "Daniele Quinn",
+      "Mark Randle",
+      "Aaron Reynolds",
+      "Blaine Rincon",
+      "Hunter Romanillos",
+      "Patrick Seda",
+      "James Stokes",
+      "Todd Layne Thompson",
+      "David Turner",
+      "Savannah West"
+    ],
+    "episodes": [
+      "tt4593118",
+      "tt4593122",
+      "tt4593126",
+      "tt4593124",
+      "tt4593128",
+      "tt4593132",
+      "tt4593134",
+      "tt4593138",
+      "tt6020684",
+      "tt6020792",
+      "tt6020796",
+      "tt6020802",
+      "tt6020806",
+      "tt6020808",
+      "tt6020810",
+      "tt6020812",
+      "tt6020876",
+      "tt7445494",
+      "tt7640050",
+      "tt7911866",
+      "tt7911884",
+      "tt7911894",
+      "tt7911914",
+      "tt7911930",
+      "tt7911942",
+    ]
+  }
+}
+
+let metadate_e = {
+  "tt4593118": { 
+    "season": "1",
+    "number": "1",
+    "date": "15 Jul. 2016",
+    "title": "Chapter One: The Vanishing of Will Byers",
+    "description": "At the U.S. Dept. of Energy an unexplained event occurs. Then when a young Dungeons and Dragons playing boy named Will disappears after a night with his friends, his mother Joyce and the town of Hawkins are plunged into darkness.",
+    "thumb_url": "https://m.media-amazon.com/images/M/MV5BMTUwNTE0ODYzOF5BMl5BanBnXkFtZTgwOTc0ODE0OTE@._V1_UX224_CR0,0,224,126_AL_.jpg",
+    "rating": "8.6"
+  },
+  "tt4593122": {
+      "season": "1",
+      "number": "2",
+      "date": "15 Jul. 2016",
+      "title": "Chapter Two: The Weirdo on Maple Street",
+      "description": "Mike hides the mysterious girl in his house. Joyce gets a strange phone call.", 
+      "thumb_url": "https://m.media-amazon.com/images/M/MV5BMjA4NzA5NDMzNF5BMl5BanBnXkFtZTgwNjY0ODE0OTE@._V1_UY126_CR14,0,224,126_AL_.jpg",
+      "rating": "8.5"
+    },
+  "tt4593126": {
+      "season": "1",
+      "number": "3",
+      "date": "15 Jul. 2016",
+      "title": "Chapter Three: Holly, Jolly",
+      "description": "An increasingly concerned Nancy looks for Barb and finds out what Jonathan's been up to. Joyce is convinced Will is trying to talk to her.",
+      
+      "thumb_url": "https://m.media-amazon.com/images/M/MV5BOTkyMDQ1NDAwOV5BMl5BanBnXkFtZTgwODU0ODE0OTE@._V1_UY126_CR14,0,224,126_AL_.jpg",
+      "rating": "8.9"
+    },
+  "tt4593124": {
+      "season": "1",
+      "number": "4",
+      "date": "15 Jul. 2016",
+      "title": "Chapter Four: The Body",
+      "description": "Refusing to believe Will is dead, Joyce tries to connect with her son. The boys give Eleven a makeover. Jonathan and Nancy form an unlikely alliance.",
+      "thumb_url": "https://m.media-amazon.com/images/M/MV5BMTkwMjU2MjgzOV5BMl5BanBnXkFtZTgwMzAzOTQ5ODE@._V1_UX224_CR0,0,224,126_AL_.jpg",
+      "rating": "9.0"
+    },
+  "tt4593128": {
+      "season": "1",
+      "number": "5",
+      "date": "15 Jul. 2016",
+      "title": "Chapter Five: The Flea and the Acrobat",
+      "description": "Hopper breaks into the lab to find the truth about Will's death. The boys try to locate the \"gate\" that will take them to Will.",
+      "thumb_url": "https://m.media-amazon.com/images/M/MV5BMjM0NjQxNTkwOF5BMl5BanBnXkFtZTgwMzY0ODE0OTE@._V1_UY126_CR14,0,224,126_AL_.jpg",
+      "rating": "8.8"
+    },
+  "tt4593132": {
+      "season": "1",
+      "number": "6",
+      "date": "15 Jul. 2016",
+      "title": "Chapter Six: The Monster",
+      "description": "Hopper and Joyce find the truth about the lab's experiments. After their fight, the boys look for the missing Eleven.",
+      "thumb_url": "https://m.media-amazon.com/images/M/MV5BNDE1MjQ1MDE3NF5BMl5BanBnXkFtZTgwOTY0ODE0OTE@._V1_UY126_CR14,0,224,126_AL_.jpg",
+      "rating": "8.9"
+    },
+  "tt4593134": {
+      "season": "1",
+      "number": "7",
+      "date": "15 Jul. 2016",
+      "title": "Chapter Seven: The Bathtub",
+      "description": "The government comes searching for Eleven. Eleven looks for Will and Barb in the Upside Down.",
+      "thumb_url": "https://m.media-amazon.com/images/M/MV5BMjMyNTkyMTg1Ml5BMl5BanBnXkFtZTgwMjAzOTQ5ODE@._V1_UX224_CR0,0,224,126_AL_.jpg",
+      "rating": "9.1"
+    },
+  "tt4593138": {
+      "season": "1",
+      "number": "8",
+      "date": "15 Jul. 2016",
+      "title": "Chapter Eight: The Upside Down",
+      "description": "Joyce and Hopper are taken in for questioning. Nancy and Jonathan prepare to fight the monster and save Will.",
+      "thumb_url": "https://m.media-amazon.com/images/M/MV5BMTEzNzk3MDY5MDdeQTJeQWpwZ15BbWU4MDg4NDgxNDkx._V1_UY126_CR0,0,224,126_AL_.jpg",
+      "rating": "9.4"
+    },
+  "tt6020684": {
+      "season": "2",
+      "number": "1",
+      "date": "27 Oct. 2017",
+      "title": "Chapter One: MADMAX",
+      "description": "As the town preps for Halloween, a high-scoring rival shakes things up at the arcade, and a skeptical Hopper inspects a field of rotting pumpkins.",
+      "thumb_url": "https://m.media-amazon.com/images/M/MV5BNDc3MzEwMjA2Ml5BMl5BanBnXkFtZTgwNTA4MzcyNDM@._V1_UY126_CR23,0,224,126_AL_.jpg",
+      "rating": "8.3"
+    },
+  "tt6020792": {
+      "season": "2",
+      "number": "2",
+      "date": "27 Oct. 2017",
+      "title": "Chapter Two: Trick or Treat, Freak",
+      "description": "After Will sees something terrible on trick-or-treat night, Mike wonders whether Eleven's still out there. Nancy wrestles with the truth about Barb.",
+      "thumb_url": "https://m.media-amazon.com/images/M/MV5BOTY2MDE3ODU2OV5BMl5BanBnXkFtZTgwMjE4MzcyNDM@._V1_UY126_CR23,0,224,126_AL_.jpg",
+      "rating": "8.4"
+    },
+  "tt6020796": {
+      "season": "2",
+      "number": "3",
+      "date": "27 Oct. 2017",
+      "title": "Chapter Three: The Pollywog",
+      "description": "Dustin adopts a strange new pet, and Eleven grows increasingly impatient. A well-meaning Bob urges Will to stand up to his fears.",
+      "thumb_url": "https://m.media-amazon.com/images/M/MV5BMTY1NDMxMDI0M15BMl5BanBnXkFtZTgwNDc4MzcyNDM@._V1_UY126_CR23,0,224,126_AL_.jpg",
+      "rating": "8.7"
+    },
+  "tt6020802": {
+      "season": "2",
+      "number": "4",
+      "date": "27 Oct. 2017",
+      "title": "Chapter Four: Will the Wise",
+      "description": "An ailing Will opens up to Joyce -- with disturbing results. While Hopper digs for the truth, Eleven unearths a surprising discovery.",
+      "thumb_url": "https://m.media-amazon.com/images/M/MV5BMjczNzczOTIxNl5BMl5BanBnXkFtZTgwNTA5MzcyNDM@._V1_UY126_CR23,0,224,126_AL_.jpg",
+      "rating": "8.7"
+    },
+  "tt6020806": {
+      "season": "2",
+      "number": "5",
+      "date": "27 Oct. 2017",
+      "title": "Chapter Five: Dig Dug",
+      "description": "Nancy and Jonathan swap conspiracy theories with a new ally as Eleven searches for someone from her past. \"Bob the Brain\" tackles a difficult problem.",
+      "thumb_url": "https://m.media-amazon.com/images/M/MV5BMzhkNzlkMDgtM2QwMy00NzVlLTk2NDEtODRiNzRkNzdlYzMzXkEyXkFqcGdeQXVyNzQ0MDUyMzg@._V1_UX224_CR0,0,224,126_AL_.jpg",
+      "rating": "8.9"
+    },
+  "tt6020808": {
+      "season": "2",
+      "number": "6",
+      "date": "27 Oct. 2017",
+      "title": "Chapter Six: The Spy",
+      "description": "Will's connection to a shadowy evil grows stronger but no one's quite sure how to stop it. Elsewhere, Dustin and Steve forge an unlikely bond.",
+      "thumb_url": "https://m.media-amazon.com/images/M/MV5BZmYwMmM1NGMtM2I4ZC00MTcxLTgxNDgtN2Y1OTM3YjMxZGViXkEyXkFqcGdeQXVyNzQ0MDUyMzg@._V1_UY126_CR23,0,224,126_AL_.jpg",
+      "rating": "9.2"
+    },
+  "tt6020810": {
+      "season": "2",
+      "number": "7",
+      "date": "27 Oct. 2017",
+      "title": "Chapter Seven: The Lost Sister",
+      "description": "Psychic visions draw Eleven to a band of violent outcasts and an angry girl with a shadowy past.",
+      "thumb_url": "https://m.media-amazon.com/images/M/MV5BMDY0OTkzY2MtZGVjOS00NTVlLWExNDAtM2M1ZjczNDVhZWI0XkEyXkFqcGdeQXVyNzQ0MDUyMzg@._V1_UX224_CR0,0,224,126_AL_.jpg",
+      "rating": "6.1"
+    },
+  "tt6020812": {
+      "season": "2",
+      "number": "8",
+      "date": "27 Oct. 2017",
+      "title": "Chapter Eight: The Mind Flayer",
+      "description": "An unlikely hero steps forward when a deadly development puts the Hawkins lab on lockdown, trapping Will and several others inside.",
+      "thumb_url": "https://m.media-amazon.com/images/M/MV5BODkzMjEzODUxM15BMl5BanBnXkFtZTgwMDU4MzcyNDM@._V1_UY126_CR23,0,224,126_AL_.jpg",
+      "rating": "9.3"
+    },
+  "tt6020876": {
+      "season": "2",
+      "number": "9",
+      "date": "27 Oct. 2017",
+      "title": "Chapter Nine: The Gate",
+      "description": "Eleven makes plans to finish what she started while the survivors turn up the heat on the monstrous force that's holding Will hostage.",
+      "thumb_url": "https://m.media-amazon.com/images/M/MV5BNTYzNjAyMDMwMV5BMl5BanBnXkFtZTgwNDk3MzcyNDM@._V1_UY126_CR23,0,224,126_AL_.jpg",
+      "rating": "9.4"
+    },
+  "tt7445494": {
+      "season": "3",
+      "number": "1",
+      "date": "4 Jul. 2019",
+      "title": "Chapter One: Suzie, Do You Copy?",
+      "description": "Summer brings new jobs and budding romance. But the mood shifts when Dustin's radio picks up a Russian broadcast, and Will senses something is wrong.",
+      "thumb_url": "https://m.media-amazon.com/images/M/MV5BNmEyNzkwZjktMTdmZS00YjljLTlkOTMtYjkwMTY3OGI5NDUxXkEyXkFqcGdeQXVyNjg2NjQwMDQ@._V1_UY126_CR14,0,224,126_AL_.jpg",
+      "rating": "8.0"
+    },
+  "tt7640050": {
+      "season": "3",
+      "number": "2",
+      "date": "4 Jul. 2019",
+      "title": "Chapter Two: The Mall Rats",
+      "description": "Nancy and Jonathan follow a lead, Steve and Robin sign on to a secret mission, and Max and Eleven go shopping. A rattled Billy has troubling visions.",
+      "thumb_url": "https://m.media-amazon.com/images/M/MV5BOWVmZTVmZTMtNjM5YS00ZWFkLTljODktYjE3ZWFmMTNkNjgzXkEyXkFqcGdeQXVyNDg4NjY5OTQ@._V1_UY126_CR14,0,224,126_AL_.jpg",
+      "rating": "8.1"
+    },
+  "tt7911866": {
+      "season": "3",
+      "number": "3",
+      "date": "4 Jul. 2019",
+      "title": "Chapter Three: The Case of the Missing Lifeguard",
+      "description": "With El and Max looking for Billy, Will declares a day without girls. Steve and Dustin go on a stakeout, and Joyce and Hopper return to Hawkins Lab.",
+      "thumb_url": "https://m.media-amazon.com/images/M/MV5BMWM1OWMwNTQtOTljZi00OTA4LWJiNTQtY2JkN2MwYTlhN2NmXkEyXkFqcGdeQXVyNDg4NjY5OTQ@._V1_UY126_CR14,0,224,126_AL_.jpg",
+      "rating": "8.4"
+    },
+  "tt7911884": {
+      "season": "3",
+      "number": "4",
+      "date": "4 Jul. 2019",
+      "title": "Chapter Four: The Sauna Test",
+      "description": "A code red brings the gang back together to face a frighteningly familiar evil. Karen urges Nancy to keep digging, and Robin finds a useful map.",
+      "thumb_url": "https://m.media-amazon.com/images/M/MV5BNzVhZTVhNDItZGYzYy00MzcwLWFlODYtZjhmNGQyNTQyZTRkXkEyXkFqcGdeQXVyMDM2NDM2MQ@@._V1_UY126_CR14,0,224,126_AL_.jpg",
+      "rating": "9.0"
+    },
+  "tt7911894": {
+      "season": "3",
+      "number": "5",
+      "date": "4 Jul. 2019",
+      "title": "Chapter Five: The Flayed",
+      "description": "Strange surprises lurk inside an old farmhouse and deep beneath the Starcourt Mall. Meanwhile, the Mind Flayer is gathering strength.",
+      "thumb_url": "https://m.media-amazon.com/images/M/MV5BZDhlNmMyOGQtMDU0Ni00OTVlLWI0NmYtNjBkMTM3MzcwMzZlXkEyXkFqcGdeQXVyNDg4NjY5OTQ@._V1_UY126_CR14,0,224,126_AL_.jpg",
+      "rating": "8.6"
+    },
+  "tt7911914": {
+      "season": "3",
+      "number": "6",
+      "date": "4 Jul. 2019",
+      "title": "Chapter Six: E Pluribus Unum",
+      "description": "Dr. Alexei reveals what the Russians have been building, and Eleven sees where Billy has been. Dustin and Erica stage a daring rescue.",
+      "thumb_url": "https://m.media-amazon.com/images/M/MV5BZDg5NjMxYzgtMmY5NS00NWI5LWI5ZmYtNTkzOTRjNjZmNDc0XkEyXkFqcGdeQXVyNDIyNjA2MTk@._V1_UY126_CR8,0,224,126_AL_.jpg",
+      "rating": "8.7"
+    },
+  "tt7911930": {
+      "season": "3",
+      "number": "7",
+      "date": "4 Jul. 2019",
+      "title": "Chapter Seven: The Bite",
+      "description": "With time running out - and an assassin close behind - Hopper's crew races back to Hawkins, where El and the kids are preparing for war.",
+      "thumb_url": "https://m.media-amazon.com/images/M/MV5BMjg0ZDA2ZDAtNjZjYi00N2VjLWJkMTAtNTlkNmU2YmVjZmE3XkEyXkFqcGdeQXVyNzg2NTk5NzQ@._V1_UY126_CR15,0,224,126_AL_.jpg",
+      "rating": "8.8"
+    },
+  "tt7911942": {
+      "season": "3",
+      "number": "8",
+      "date": "4 Jul. 2019",
+      "title": "Chapter Eight: The Battle of Starcourt",
+      "description": "Terror reigns in the food court when the Mind Flayer comes to collect. But down below, in the dark, the future of the world is at stake.",
+      "thumb_url": "https://m.media-amazon.com/images/M/MV5BODY4YjVjNzMtZmE4ZC00ZTljLTk2OTYtNmRiOWNhNjBkODU3XkEyXkFqcGdeQXVyNTQ0NjQzNTE@._V1_UY126_CR14,0,224,126_AL_.jpg",
+      "rating": "9.3"
+    }
+}
+function redraw(filtered, clicked_id) {
+    if(!clicked_id) {
+        let view = document.querySelector("#view");
+        view.innerHTML = "";
+        let target = filtered ? filtered : metadata;
+        for (let id in target) {
+            let title = target[id];
+            let figure = document.createElement("figure");
+            let poster = document.createElement("img");
+            poster.src = title["thumb_url"];
+            poster.setAttribute("onclick", "redraw(null, \'" + id + "\')");
+            let figcaption = document.createElement("figcaption");
+            figcaption.textContent = title["title"];
+            figure.appendChild(poster);
+            figure.appendChild(figcaption);
+            view.appendChild(figure);
+        }
+        return;
+    }
+    
+    let target = metadata[clicked_id];
+    let view = document.querySelector("#view");
+    view.setAttribute("class", "series");
+    view.innerHTML = "";
+    let figure = document.createElement("figure");
+    let poster = document.createElement("img");
+    poster.src = target["thumb_url"];
+    figure.appendChild(poster);
+    
+    let figcaption = document.createElement("figcaption");
+    figcaption.textContent = target["title"];
+    figure.appendChild(figcaption);
+
+    figcaption = document.createElement("figcaption");
+    figcaption.textContent = target["type"];
+    figure.appendChild(figcaption);
+
+    figcaption = document.createElement("figcaption");
+    figcaption.textContent = "Rating: " + target["rating"];
+    figure.appendChild(figcaption);
+
+    figcaption = document.createElement("figcaption");
+    figcaption.textContent = target["Synopsis"];
+    figure.appendChild(figcaption);
+
+    figcaption = document.createElement("figcaption");
+    figcaption.textContent = "Directors: ";
+    let end = target["directors"].length > 3 ? 3 : target["directors"].length;
+    for(let i = 0; i < end - 1; ++i)  
+      figcaption.textContent += (target["directors"][i] + ", ");
+    figcaption.textContent += target["directors"][end - 1];
+    figure.appendChild(figcaption);
+
+    figcaption = document.createElement("figcaption");
+    figcaption.textContent = "Actors: ";
+    end = target["actors"].length > 3 ? 3 : target["actors"].length;
+    for(let i = 0; i < end - 1; ++i)  
+      figcaption.textContent += (target["actors"][i] + ", ");
+    figcaption.textContent += target["actors"][end - 1];
+    figure.appendChild(figcaption);
+
+    figcaption = document.createElement("figcaption");
+    figcaption.textContent = "Genres: ";
+    end = target["genres"].length > 3 ? 3 : target["genres"].length;
+    for(let i = 0; i < end - 1; ++i)
+      figcaption.textContent += (target["genres"][i] + ", ");
+    figcaption.textContent += target["genres"][end - 1];
+    figure.appendChild(figcaption);
+
+    figcaption = document.createElement("figcaption");
+    figcaption.textContent = "Year: " + target["year"];
+    figure.appendChild(figcaption);
+    view.appendChild(figure);
+
+    for (let key of target["episodes"]) {
+      let episode = metadate_e[key];
+      let e_figure = document.createElement("figure");
+      let e_poster = document.createElement("img");
+      e_poster.src = episode["thumb_url"];
+      e_figure.appendChild(e_poster);
+
+      let e_figcaption = document.createElement("figcaption");
+      e_figcaption.textContent = "Season: " + episode["season"];
+      e_figure.appendChild(e_figcaption);
+
+      e_figcaption = document.createElement("figcaption");
+      e_figcaption.textContent = "Number: " + episode["number"];
+      e_figure.appendChild(e_figcaption);
+
+      e_figcaption = document.createElement("figcaption");
+      e_figcaption.textContent = "Title: " + episode["title"];
+      e_figure.appendChild(e_figcaption);
+
+      e_figcaption = document.createElement("figcaption");
+      e_figcaption.textContent = "Rating: " + episode["rating"];
+      e_figure.appendChild(e_figcaption);
+
+      e_figcaption = document.createElement("figcaption");
+      e_figcaption.textContent = "Description: " + episode["description"];
+      e_figure.appendChild(e_figcaption);
+
+      e_figcaption = document.createElement("figcaption");
+      e_figcaption.textContent = "Date: " + episode["date"];
+      e_figure.appendChild(e_figcaption);
+
+      view.appendChild(e_figure);
+    }
+}
+function filter(keyword) {
+    let ret = {};
+    for (let id in metadata)
+        for (let value of Object.values(metadata[id]))
+            if (typeof value === "string") {
+                if (value.toLowerCase().includes(keyword.toLowerCase()))
+                    ret[id] = metadata[id];
+            }
+            else if (typeof value === 'object')
+                for (let e of value)
+                    if (e.toLowerCase().includes(keyword.toLowerCase()))
+                        ret[id] = metadata[id];
+    return ret;
+}
+function search(e) {
+    if (event.keyCode == 13)
+        redraw(filter(e.value, null));
+}
+redraw();
+</script>
+</body>
+</html>
