@@ -26,7 +26,59 @@ body {
 
 #view {
     display: flex;
+}
+
+#view.main {
     flex-wrap: wrap;
+}
+
+#view > article {
+    margin: 50px;
+}
+
+#view > article > table {
+    width: 100%;
+    color: white;
+    text-align: center;
+}
+
+#view > article > table tr:nth-child(even) {
+    background-color: #363636;
+}
+
+#view > article > table tr:nth-child(odd) {
+    background-color: #222021;
+}
+
+#view > nav {
+    margin: 50px;
+    display: flex;
+    flex-flow: column;
+    width: 200px;
+}
+
+#view > nav p {
+    color: white;
+    margin-block-end: 0px;
+}
+
+#view > nav p.center {
+    text-align: center;
+}
+
+#view > nav img {
+    opacity: 1;
+    width: 100%;
+    box-shadow: 5px 5px black;
+    transition: .1s ease-in-out;
+}
+
+#view > nav:hover img {
+    opacity: .5;
+}
+
+#view  article {
+    flex: auto;
 }
 
 #view > figure {
@@ -56,11 +108,294 @@ body {
 <section id="top">
     <input type="text" name="search" placeholder="Search" onkeydown="search(this)">
 </section>
-<section id="view">
+<section id="view" class="main">
 </section>
 <script>
 
-let metadata = {
+let e = {
+  "5dc08a30-e79a-11e9-bb09-cd860116bbdb": {
+    "season": "1",
+    "number": "1",
+    "date": "15 Jul. 2016",
+    "title": "Chapter One: The Vanishing of Will Byers",
+    "description": "At the U.S. Dept. of Energy an unexplained event occurs. Then when a young Dungeons and Dragons playing boy named Will disappears after a night with his friends, his mother Joyce and the town of Hawkins are plunged into darkness.",
+    "rating": "8.6"
+  },
+  "5ec83630-e79a-11e9-bb09-cd860116bbdb": {
+    "season": "1",
+    "number": "2",
+    "date": "15 Jul. 2016",
+    "title": "Chapter Two: The Weirdo on Maple Street",
+    "description": "Mike hides the mysterious girl in his house. Joyce gets a strange phone call.",
+    "rating": "8.5"
+  },
+  "5ec83631-e79a-11e9-bb09-cd860116bbdb": {
+    "season": "1",
+    "number": "3",
+    "date": "15 Jul. 2016",
+    "title": "Chapter Three: Holly, Jolly",
+    "description": "An increasingly concerned Nancy looks for Barb and finds out what Jonathan's been up to. Joyce is convinced Will is trying to talk to her.",
+    "rating": "8.9"
+  },
+  "5ec83632-e79a-11e9-bb09-cd860116bbdb": {
+    "season": "1",
+    "number": "4",
+    "date": "15 Jul. 2016",
+    "title": "Chapter Four: The Body",
+    "description": "Refusing to believe Will is dead, Joyce tries to connect with her son. The boys give Eleven a makeover. Jonathan and Nancy form an unlikely alliance.",
+    "rating": "9.0"
+  },
+  "5ec83633-e79a-11e9-bb09-cd860116bbdb": {
+    "season": "1",
+    "number": "5",
+    "date": "15 Jul. 2016",
+    "title": "Chapter Five: The Flea and the Acrobat",
+    "description": "Hopper breaks into the lab to find the truth about Will's death. The boys try to locate the \"gate\" that will take them to Will.",
+    "rating": "8.8"
+  },
+  "60b734f0-e79a-11e9-bb09-cd860116bbdb": {
+    "season": "1",
+    "number": "1",
+    "date": "4 Oct. 1995",
+    "title": "Shito, Shuurai",
+    "description": "Shinji Ikari, a 14-year-old boy in the city of Tokyo-3, is delivered to the secret organization NERV, where he is requested by his enigmatic father to save the city from an invading creature called an Angel.",
+    "rating": "7.8"
+  },
+  "626d4960-e79a-11e9-bb09-cd860116bbdb": {
+    "season": "1",
+    "number": "2",
+    "date": "11 Oct. 1995",
+    "title": "Mishiranu, Tenjou",
+    "description": "In the wake of the previous battle, Misato hastily decides to let Shinji have a room in her apartment, where he discovers just what an irresponsible person his new guardian is. Shinji is also haunted by memories of his fight with the Angel.",
+    "rating": "8.1"
+  },
+  "626d4961-e79a-11e9-bb09-cd860116bbdb": {
+    "season": "1",
+    "number": "3",
+    "date": "18 Oct. 1995",
+    "title": "Naranai, Denwa",
+    "description": "Shinji transfers into a new school within Tokyo-3, catching the fascination of his classmates - and igniting the ire of one student whose sister was injured in the EVA's last battle. Meanwhile, a second Angel makes its way into the city.",
+    "rating": "7.8"
+  },
+  "626d4962-e79a-11e9-bb09-cd860116bbdb": {
+    "season": "1",
+    "number": "4",
+    "date": "25 Oct. 1995",
+    "title": "Ame, Nigedashita Ato",
+    "description": "Frustrated by his newfound responsibilities, Shinji runs away from Misato and NERV. After being escorted back to the organization by armed officials, Shinji must decide whether he truly wants to abandon his role as a pilot.",
+    "rating": "7.6"
+  },
+  "626d4963-e79a-11e9-bb09-cd860116bbdb": {
+    "season": "1",
+    "number": "5",
+    "date": "1 Nov. 1995",
+    "title": "Rei, Kokoro no Mukou ni",
+    "description": "Rei Ayanami, the pilot of Evangelion Unit 00, is scheduled to undergo another activation test following a horrible accident nearly a month earlier. Shinji makes attempts to understand Rei and her close relationship with his father.",
+    "rating": "7.9"
+  },
+  "64ce6ae0-e79a-11e9-bb09-cd860116bbdb": {
+    "season": "1",
+    "number": "0",
+    "date": "22 Jul. 2006",
+    "title": "Unaired Premiere Episode",
+    "description": "In New York, Peter Petrelli is the younger brother of Nathan Petrelli, an overly ambitious and unscrupulous candidate for the next New York congressman. Peter begins having strange dreams and begins to believe that he can fly, but Nathan is skeptic to his younger brother's claims. Peter decides to prove his theory and jumps from the roof of a building in an alley and his brother flies and saves him... revealing that Nathan has the ability to fly, not Peter. In Texas, cheerleader Claire Bennet learns that she is literally indestructible and can not harm herself or die....",
+    "rating": "8.3"
+  },
+  "66444200-e79a-11e9-bb09-cd860116bbdb": {
+    "season": "1",
+    "number": "1",
+    "date": "25 Sep. 2006",
+    "title": "Chapter One 'Genesis'",
+    "description": "In Manhattan, Peter Petrelli is the younger brother Nathan Petrelli an overly ambitious and unscrupulous candidate for the next New York congressman, and he dreams and believes that he can fly. He decides to prove his theory and jumps from the roof of a building in an alley and his brother flies and saves him. In Texas, cheerleader Claire Bennet learns that she is literally indestructible and can not harm herself or die. She saves a fireman in a fire in a train, but does not take the credit. In Tokyo, Hiro Nakamura believes he can control time and space continuum. In ...",
+    "rating": "8.3"
+  },
+  "66444201-e79a-11e9-bb09-cd860116bbdb": {
+    "season": "1",
+    "number": "2",
+    "date": "2 Oct. 2006",
+    "title": "Chapter Two 'Don't Look Back'",
+    "description": "When Nikki wakes up, she sees the two criminals dead in her garage. She brings her son and finds a brand new Cadillac in her name and the bodies in the trunk, with instructions and a map to bury the corpses in the desert. Peter awakes in the hospital and his mother tells him that his father was depressed and committed suicide. When Peter decides to jump from the terrace of his building, his brother Nathan discloses that both can fly. Hiro is teleported to the Times Square and finds a comic book written by Isaac Mendez telling his saga. He goes to Isaac studio, finds ...",
+    "rating": "8.2"
+  },
+  "66444202-e79a-11e9-bb09-cd860116bbdb": {
+    "season": "1",
+    "number": "3",
+    "date": "9 Oct. 2006",
+    "title": "Chapter Three 'One Giant Leap'",
+    "description": "As the \"Heroes\" continue to test their newfound extraordinary abilities, Claire tries to maintain a normal social life when a romance with the football quarterback takes a tragic turn. While Hiro convinces his friend that they are destined to travel to America to save the world, a frightened Niki follows instructions from a mysterious, unknown source that directs her to the middle of the desert. Meanwhile, Nathan uses Peter's accident to propel his political campaign. The elusive Sylar is being hunted by both Matt and the FBI, as well as Suresh, whose father's journal...",
+    "rating": "8.2"
+  },
+  "66444203-e79a-11e9-bb09-cd860116bbdb": {
+    "season": "1",
+    "number": "4",
+    "date": "16 Oct. 2006",
+    "title": "Chapter Four 'Collision'",
+    "description": "Suresh finally tracks down one of his father's fabled genetically advanced \"supermen.\" In Las Vegas, Hiro's plan backfires when he cautiously turns time to his advantage at the gambling tables. Niki's mafia debtors use their leverage to their benefit in a more elaborate scheme, while Nathan pays a personal visit to a wealthy Vegas contributor to raise additional campaign funds. Following a tragic turn at a bonfire, Claire's uncanny healing abilities are put to the ultimate test, but according to Isaac's paintings, her future could be fraught with even more peril. ...",
+    "rating": "8.2"
+  },
+  "685d36f0-e79a-11e9-bb09-cd860116bbdb": {
+    "season": "1",
+    "number": "1",
+    "date": "6 May 2019",
+    "title": "1:23:45",
+    "description": "Plant workers and firefighters put their lives on the line to control a catastrophic April 1986 explosion at a Soviet nuclear power plant.",
+    "rating": "9.5"
+  },
+  "693b61f0-e79a-11e9-bb09-cd860116bbdb": {
+    "season": "1",
+    "number": "2",
+    "date": "13 May 2019",
+    "title": "Please Remain Calm",
+    "description": "With untold millions at risk, Ulana makes a desperate attempt to reach Valery and warn him about the threat of a second explosion.",
+    "rating": "9.7"
+  },
+  "693b61f1-e79a-11e9-bb09-cd860116bbdb": {
+    "season": "1",
+    "number": "3",
+    "date": "20 May 2019",
+    "title": "Open Wide, O Earth",
+    "description": "Valery creates a detailed plan to decontaminate Chernobyl; Lyudmilla ignores warnings about her firefighter husband's contamination.",
+    "rating": "9.6"
+  },
+  "693b61f2-e79a-11e9-bb09-cd860116bbdb": {
+    "season": "1",
+    "number": "4",
+    "date": "27 May 2019",
+    "title": "The Happiness of All Mankind",
+    "description": "Valery and Boris attempt to find solutions to removing the radioactive debris; Ulana attempts to find out the cause of the explosion.",
+    "rating": "9.5"
+  },
+  "693b61f3-e79a-11e9-bb09-cd860116bbdb": {
+    "season": "1",
+    "number": "5",
+    "date": "3 Jun. 2019",
+    "title": "Vichnaya Pamyat",
+    "description": "Valery, Boris and Ulana risk their lives and reputations to expose the truth about Chernobyl.",
+    "rating": "9.9"
+  },
+  "6ade1570-e79a-11e9-bb09-cd860116bbdb": {
+    "season": "1",
+    "number": "1",
+    "date": "10 Sep. 1994",
+    "title": "Gets Lost in Space",
+    "description": "Topic: The Solar System. Arnold's cousin Janet joins the class on a trip to explore the solar system.",
+    "rating": "8.2"
+  },
+  "6cb6cd10-e79a-11e9-bb09-cd860116bbdb": {
+    "season": "1",
+    "number": "2",
+    "date": "17 Sep. 1994",
+    "title": "For Lunch",
+    "description": "Topic: Digestion. Arnold's so excited he doesn't have to go on a field trip! But when he accidentally swallows his miniaturized class, he becomes the field trip.",
+    "rating": "8.2"
+  },
+  "6cb6cd11-e79a-11e9-bb09-cd860116bbdb": {
+    "season": "1",
+    "number": "3",
+    "date": "24 Sep. 1994",
+    "title": "Inside Ralphie",
+    "description": "Topic: Germs. Ralphie is crushed when a fever keeps him home from school the day he's scheduled to host a FNN (Frizzle News Network) television broadcast on health. With Tyne Daly as Ralphie's mom.",
+    "rating": "8.3"
+  },
+  "6cb6cd12-e79a-11e9-bb09-cd860116bbdb": {
+    "season": "1",
+    "number": "4",
+    "date": "1 Oct. 1994",
+    "title": "Gets Eaten",
+    "description": "Topic: The Food Chain. Arnold and Keesha are in trouble when they forget to bring in their assignment on \"two things that go together.\"",
+    "rating": "8.1"
+  },
+  "6cb6cd13-e79a-11e9-bb09-cd860116bbdb": {
+    "season": "1",
+    "number": "5",
+    "date": "8 Oct. 1994",
+    "title": "Hops Home",
+    "description": "Topic: Habitats. When Wanda's pet frog, Bella, jumps out an open window, Ms. Frizzle shrinks the bus into a mechanical frog and takes her now tiny class on a hop-along adventure.",
+    "rating": "7.7"
+  },
+  "6f104d70-e79a-11e9-bb09-cd860116bbdb": {
+    "season": "1",
+    "number": "1",
+    "date": "2 Mar. 2009",
+    "title": "I'm an Adult Now",
+    "description": "Toby rescues a woman from a car wreck. Reading her mind, her child was abducted but she fears saying anything.",
+    "rating": "7.1"
+  },
+  "70c06e70-e79a-11e9-bb09-cd860116bbdb": {
+    "season": "1",
+    "number": "2",
+    "date": "4 Jun. 2009",
+    "title": "Emotional Rescue",
+    "description": "After saving a childhood friend from a burning building, Toby tracks town an arsonist that he believes might be responsible for a series of fires in the city.",
+    "rating": "7.4"
+  },
+  "70c06e71-e79a-11e9-bb09-cd860116bbdb": {
+    "season": "1",
+    "number": "3",
+    "date": "11 Jun. 2009",
+    "title": "A Voice in the Dark",
+    "description": "Toby encounters a crazed street person who may hold the key to locating a missing girl.",
+    "rating": "7.7"
+  },
+  "70c06e72-e79a-11e9-bb09-cd860116bbdb": {
+    "season": "1",
+    "number": "4",
+    "date": "18 Jun. 2009",
+    "title": "Some Kinda Love",
+    "description": "After meeting a young woman at a nightclub who is later found dead, Toby is considered the prime suspect and must clear his name.",
+    "rating": "7.7"
+  },
+  "70c06e73-e79a-11e9-bb09-cd860116bbdb": {
+    "season": "1",
+    "number": "5",
+    "date": "2 Jul. 2009",
+    "title": "Lisa Says",
+    "description": "When Toby saves a teenage boy from a gang beating, he learns that a series of drug store robberies may be linked to the runaway's turbulent past.",
+    "rating": "7.6"
+  },
+  "72feecc0-e79a-11e9-bb09-cd860116bbdb": {
+    "season": "1",
+    "number": "1",
+    "date": "23 Jun. 2011",
+    "title": "Happiness",
+    "description": "After a failed suicide attempt, Ryan notices that he sees the neighbor's dog as a person dressed dog costume.",
+    "rating": "8.0"
+  },
+  "74515d60-e79a-11e9-bb09-cd860116bbdb": {
+    "season": "1",
+    "number": "2",
+    "date": "30 Jun. 2011",
+    "title": "Trust",
+    "description": "Wilfred is angry after Ryan tricks him into going to the veterinarian.",
+    "rating": "7.7"
+  },
+  "74515d61-e79a-11e9-bb09-cd860116bbdb": {
+    "season": "1",
+    "number": "3",
+    "date": "7 Jul. 2011",
+    "title": "Fear",
+    "description": "Ryan discovers Wilfred left his wallet outside when they broke into Spencer's house.",
+    "rating": "7.7"
+  },
+  "74515d62-e79a-11e9-bb09-cd860116bbdb": {
+    "season": "1",
+    "number": "4",
+    "date": "14 Jul. 2011",
+    "title": "Acceptance",
+    "description": "Ryan feels obligated to repay his sister's help, however inappropriate, and therefore must shortly hand Wilfred into Darryl's daycare. The dog feels neglected and behaves strangely depressed.",
+    "rating": "7.7"
+  },
+  "74515d63-e79a-11e9-bb09-cd860116bbdb": {
+    "season": "1",
+    "number": "5",
+    "date": "21 Jul. 2011",
+    "title": "Respect",
+    "description": "Ryan and Wilfred volunteer at a hospice and discover Wilfred may have a remarkable secret talent.",
+    "rating": "7.7"
+  }
+};
+
+let s = {
   "tt4574334": {
     "type": "TV Series",
     "title": "Stranger Things",
@@ -314,6 +649,7 @@ let metadata = {
       "Alex Van",
       "Susan Williams",
       "Ricardo Miguel Young",
+      "Nicholas G. Sims",
       "Jim Heard",
       "Noah Hein",
       "Warren Quandt",
@@ -373,6 +709,7 @@ let metadata = {
       "Daniel Guttenberg",
       "Bradford Haynes",
       "Rory Healy",
+      "Duke Jackson",
       "Tabitha Kilgore",
       "Jesse Kindred",
       "Christopher Ryan Lewis",
@@ -456,6 +793,13 @@ let metadata = {
       "Todd Layne Thompson",
       "David Turner",
       "Savannah West"
+    ],
+    "episode": [
+      "5dc08a30-e79a-11e9-bb09-cd860116bbdb",
+      "5ec83630-e79a-11e9-bb09-cd860116bbdb",
+      "5ec83631-e79a-11e9-bb09-cd860116bbdb",
+      "5ec83632-e79a-11e9-bb09-cd860116bbdb",
+      "5ec83633-e79a-11e9-bb09-cd860116bbdb"
     ]
   },
   "tt0112159": {
@@ -597,6 +941,13 @@ let metadata = {
       "Chris Patton",
       "Melissa Cybele Sparks",
       "Randy Sparks"
+    ],
+    "episode": [
+      "60b734f0-e79a-11e9-bb09-cd860116bbdb",
+      "626d4960-e79a-11e9-bb09-cd860116bbdb",
+      "626d4961-e79a-11e9-bb09-cd860116bbdb",
+      "626d4962-e79a-11e9-bb09-cd860116bbdb",
+      "626d4963-e79a-11e9-bb09-cd860116bbdb"
     ]
   },
   "tt0813715": {
@@ -1210,7 +1561,7 @@ let metadata = {
       "Nancy McCrumb",
       "Kim Meredith",
       "Joseph J. Micucci",
-      "Jared Ward",
+      "Jared Farid Ward",
       "Kazumi Aihara",
       "Joseph Bayard",
       "Billy Joe Brewer III",
@@ -1262,6 +1613,13 @@ let metadata = {
       "Denise Vasquez",
       "George F. Watson",
       "Maria Zambrana"
+    ],
+    "episode": [
+      "64ce6ae0-e79a-11e9-bb09-cd860116bbdb",
+      "66444200-e79a-11e9-bb09-cd860116bbdb",
+      "66444201-e79a-11e9-bb09-cd860116bbdb",
+      "66444202-e79a-11e9-bb09-cd860116bbdb",
+      "66444203-e79a-11e9-bb09-cd860116bbdb"
     ]
   },
   "tt7366338": {
@@ -1373,6 +1731,13 @@ let metadata = {
       "Bartas Erminas",
       "Roman Listopad",
       "Danguole Ragazinskaite"
+    ],
+    "episode": [
+      "685d36f0-e79a-11e9-bb09-cd860116bbdb",
+      "693b61f0-e79a-11e9-bb09-cd860116bbdb",
+      "693b61f1-e79a-11e9-bb09-cd860116bbdb",
+      "693b61f2-e79a-11e9-bb09-cd860116bbdb",
+      "693b61f3-e79a-11e9-bb09-cd860116bbdb"
     ]
   },
   "tt0108847": {
@@ -1490,6 +1855,13 @@ let metadata = {
       "Ron Rubin",
       "Sam Seder",
       "Richard Yearwood"
+    ],
+    "episode": [
+      "6ade1570-e79a-11e9-bb09-cd860116bbdb",
+      "6cb6cd10-e79a-11e9-bb09-cd860116bbdb",
+      "6cb6cd11-e79a-11e9-bb09-cd860116bbdb",
+      "6cb6cd12-e79a-11e9-bb09-cd860116bbdb",
+      "6cb6cd13-e79a-11e9-bb09-cd860116bbdb"
     ]
   },
   "tt1181541": {
@@ -2206,6 +2578,13 @@ let metadata = {
       "Maria Dinn",
       "Azra Valani",
       "Gibran Hassan"
+    ],
+    "episode": [
+      "6f104d70-e79a-11e9-bb09-cd860116bbdb",
+      "70c06e70-e79a-11e9-bb09-cd860116bbdb",
+      "70c06e71-e79a-11e9-bb09-cd860116bbdb",
+      "70c06e72-e79a-11e9-bb09-cd860116bbdb",
+      "70c06e73-e79a-11e9-bb09-cd860116bbdb"
     ]
   },
   "tt1703925": {
@@ -2373,6 +2752,13 @@ let metadata = {
       "Garrett William Henson",
       "Scott Rosendall",
       "Sandra Rosko"
+    ],
+    "episode": [
+      "72feecc0-e79a-11e9-bb09-cd860116bbdb",
+      "74515d60-e79a-11e9-bb09-cd860116bbdb",
+      "74515d61-e79a-11e9-bb09-cd860116bbdb",
+      "74515d62-e79a-11e9-bb09-cd860116bbdb",
+      "74515d63-e79a-11e9-bb09-cd860116bbdb"
     ]
   },
   "tt2084970": {
@@ -2473,15 +2859,75 @@ let metadata = {
       "Josh Wichard"
     ]
   }
+};
+
+function show_detail(id) {
+    let view = document.querySelector("#view");
+    view.innerHTML = "";
+    view.className = "detail";
+    let nav = document.createElement("nav");
+    let poster = document.createElement("img");
+    poster.src = s[id]["thumb_url"];
+    nav.appendChild(poster);
+    let title = document.createElement("p");
+    title.textContent = s[id]["title"];
+    title.className = "center";
+    nav.appendChild(title);
+    let year = document.createElement("p");
+    year.textContent = s[id]["year"];
+    year.className = "center";
+    nav.appendChild(year);
+    let genre = document.createElement("p")
+    genre.className = "center";
+    s[id]["genres"].forEach(function(element, index) {
+        if (index != 0)
+            genre.textContent += ", ";
+        genre.textContent += element;
+    });
+    nav.appendChild(genre);
+    let synopsis = document.createElement("p");
+    synopsis.textContent = s[id]["synopsis"];
+    synopsis.className= "center";
+    nav.appendChild(synopsis);
+    let article = document.createElement("article");
+    let table = document.createElement("table");
+    let r = table.insertRow();
+    let c1 = r.insertCell();
+    let c2 = r.insertCell();
+    let c3 = r.insertCell();
+    let c4 = r.insertCell();
+    c1.innerHTML = "Season";
+    c2.innerHTML = "Episode";
+    c3.innerHTML = "Title";
+    c4.innerHTML = "Date";
+    if (s[id]["episode"])
+        s[id]["episode"].forEach(function(eid) {
+            let row = table.insertRow();
+            let cell1 = row.insertCell();
+            let cell2 = row.insertCell();
+            let cell3 = row.insertCell();
+            let cell4 = row.insertCell();
+            cell1.innerHTML = e[eid]["season"];
+            cell2.innerHTML = e[eid]["number"];
+            cell3.innerHTML = e[eid]["title"];
+            cell4.innerHTML = e[eid]["date"];
+        });
+    article.appendChild(table);
+    view.appendChild(nav);
+    view.appendChild(article);
 }
 
 function redraw(filtered) {
     let view = document.querySelector("#view");
     view.innerHTML = "";
-    let target = filtered ? filtered : metadata;
+    view.className = "main";
+    let target = filtered ? filtered : s;
     for (let id in target) {
         let title = target[id];
         let figure = document.createElement("figure");
+        figure.addEventListener("click", function (e) {
+            show_detail(id);
+        });
         let poster = document.createElement("img");
         poster.src = title["thumb_url"];
         let figcaption = document.createElement("figcaption");
@@ -2494,16 +2940,16 @@ function redraw(filtered) {
 
 function filter(keyword) {
     let ret = {};
-    for (let id in metadata)
-        for (let value of Object.values(metadata[id]))
+    for (let id in s)
+        for (let value of Object.values(s[id]))
             if (typeof value === "string") {
                 if (value.toLowerCase().includes(keyword.toLowerCase()))
-                    ret[id] = metadata[id];
+                    ret[id] = s[id];
             }
             else if (typeof value === 'object')
                 for (let e of value)
                     if (e.toLowerCase().includes(keyword.toLowerCase()))
-                        ret[id] = metadata[id];
+                        ret[id] = s[id];
     return ret;
 }
 
