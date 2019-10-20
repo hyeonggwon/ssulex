@@ -28,10 +28,9 @@ class myanimelist {
 
     parse_main_page(m) {
         let dom = new jsdom.JSDOM(m);
-        let title = dom.window.document.querySelector("span[itemprop='name']").textContent.trim();
         return {
             "type": "anime",
-            "title": title,
+            "title": dom.window.document.querySelector("span[itemprop='name']").textContent.trim(),
             "year": dom.window.document.querySelector("a[href^='https://myanimelist.net/anime/season/']").textContent.trim(),
             "synopsis": dom.window.document.querySelector("span[itemprop='description']").textContent.trim(),
             "genres": Object.values(dom.window.document.querySelectorAll("a[href^='/anime/genre/'")).map(node => node.textContent.trim()),
@@ -40,7 +39,7 @@ class myanimelist {
         };
     }
 
-    parse_director_page(d) {
+    parse_staff_actor_page(d) {
         let dom = new jsdom.JSDOM(d);
         let staffs = Object.values(dom.window.document.querySelectorAll("td[class^='borderClass'] > a[href^='https://myanimelist.net/people/']")).map(node => node.textContent.trim());
         let is_directors = Object.values(dom.window.document.querySelectorAll("td[class^='borderClass'] > a[href^='https://myanimelist.net/people/'] ~ .spaceit_pad > small")).map(node => node.textContent.trim());
@@ -57,83 +56,84 @@ class myanimelist {
         }
         
         return {
-            "directors": directors
+            "directors": directors,
+            "actors": Object.values(dom.window.document.querySelectorAll("td[class^='borderClass'] td[align='right'] a[href^='https://myanimelist.net/people/']")).map(node => node.textContent.trim())
         };
     }
 
-/*
-    parse_cast_page(d) {
-        let dom = new jsdom.JSDOM(d);
-        return {
-            "actors": Object.values(dom.window.document.querySelectorAll("#fullcredits-content h4")).map(node => node.textContent.trim())
-        };
-    }
-*/
     async get_series_info(id) {
-        
-        let [m] = await Promise.all([simple_https_get("https://myanimelist.net/anime/" + id + "/")]);
-        let parsed_main_page = this.parse_main_page(m);
-        let title = parsed_main_page["title"];
-        let [d, c] = await Promise.all([
-            simple_https_get("https://myanimelist.net/anime/" + id + '/' + title + "/characters"),
-            simple_https_get("https://m.imdb.com/title/" + id + "/fullcredits/cast")
+        let [m, s] = await Promise.all([
+            simple_https_get("https://myanimelist.net/anime/" + id + "/"),
+            simple_https_get("https://myanimelist.net/anime/" + id + "/" + id + "/characters")
         ]);
 
         return {
-            ...parsed_main_page,
-            ...this.parse_director_page(d),
-            //...this.parse_cast_page(c)
+            ...this.parse_main_page(m),
+            ...this.parse_staff_actor_page(s)
         };
     }
 
-    async get_title(id) {
-        let [m] = await Promise.all([simple_https_get("https://myanimelist.net/anime/" + id + "/")]);
-        let dom = new jsdom.JSDOM(m);
-        return dom.window.document.querySelector("span[itemprop='name']").textContent.trim();
-    }
-
-    async parse_episode_page(id, title, episode) {
-        let [e] = await Promise.all([simple_https_get("https://myanimelist.net/anime/" + id + "/" + title + "/episode/" + episode)]);
-        let dom = new jsdom.JSDOM(e);
-        //let dom = new jsdom.JSDOM(simple_https_get("https://myanimelist.net/anime/" + id + "/" + title + "/episode/" + episode));
-        let title_origin = dom.window.document.querySelector(".fs18.lh11").textContent.trim();
-        let desc_origin = dom.window.document.querySelector(".pt8.pb8").textContent.trim();
-        let thumbnail = dom.window.document.querySelector(".video-embed.clearfix a img");
-        return {
-            "number": episode,
-            "date": dom.window.document.querySelector(".ar.fn-grey2").textContent.split("Aired: ")[1],
-            "title": title_origin.substring(dom.window.document.querySelector(".fs18.lh11 .fw-n").textContent.length, title_origin.length).trim(),
-            "description": desc_origin.substring(dom.window.document.querySelector(".pt8.pb8 .fw-b").textContent.length, desc_origin.length).trim(),
-            "thumb_url": thumbnail == null ? "https://m.media-amazon.com/images/G/01/imdb/images/nopicture/medium/film-3385785534._CB483791896_.png" : thumbnail.src
-        }
+    // 전체 에피소드를 불러와서 캐시에 통째로 저장하는 방식
+    /*
+    async pull_divided_episode(id, offset) {
+        let dom = new jsdom.JSDOM(await simple_https_get("https://myanimelist.net/anime/" + id + "/" + id + "/episode?offset=" + offset));
+        this.cache[id] = this.cache[id].concat(Object.values(dom.window.document.querySelectorAll(".ascend .episode-list-data")).map(episode => {
+            return {
+                "number": episode.querySelector("td[class='episode-number nowrap']").textContent.trim(),
+                "date": episode.querySelector("td[class='episode-aired nowrap']").textContent.trim(),
+                "title": episode.querySelector(".episode-title a").textContent.trim(),
+                "description": episode.querySelector(".episode-title span").textContent.trim()
+            }
+        }));
     }
     async pull_episode_info(id) {
-        
-        let title = await this.get_title(id);
-        let dom = new jsdom.JSDOM(await simple_https_get("https://myanimelist.net/anime/" + id + "/" + title + "/episode"));
+        let dom = new jsdom.JSDOM(await simple_https_get("https://myanimelist.net/anime/" + id + "/" + id + "/episode"));
         this.cache[id] = [];
 
         let hundred_over = Object.values(dom.window.document.querySelectorAll(".pagination a"));
         if(hundred_over.length) {
             hundred_over = hundred_over.map(node => node.textContent.trim());
             let splited = hundred_over[hundred_over.length-1].split(' ');
-            let total_num = parseInt(splited[splited.length - 1]);
-            for(let i = 1; i <= total_num; ++i)
-                this.cache[id].push(await this.parse_episode_page(id, title, i));
+            let end = parseInt(parseInt(splited[splited.length - 1]) / 100) * 100;
+            for(let offset = 0; offset <= end; offset += 100)
+                await this.pull_divided_episode(id, offset);
         }
-        else {
-            let total_num = dom.window.document.querySelectorAll("table[class='mt8 episode_list js-watch-episode-list descend'] tr td[class='episode-number nowrap']")[0].textContent;
-            for(let i = 1; i <= total_num; ++i)
-                this.cache[id].push(await this.parse_episode_page(id, title, i));
-        }
+        else
+           await this.pull_divided_episode(id, 0);
     }
 
     async get_episode_info(id, episode) {
-        if (!this.cache[id]) {
+        if (!this.cache[id])
             await this.pull_episode_info(id);
-        }
 
         let info = this.cache[id][episode];
+        if (info)
+            return info;
+        else
+            throw "IMDB has no info for that episode.";
+    }
+    */
+
+    // 에피소드를 100개 단위로 불러와서 캐시에 100개 단위로 나누어 저장하는 방식
+    async pull_episode_info(id, hundred_offset) {
+        if (!this.cache[id])
+            this.cache[id] = {};
+        let dom = new jsdom.JSDOM(await simple_https_get("https://myanimelist.net/anime/" + id + "/" + id + "/episode?offset=" + (hundred_offset * 100)));
+        this.cache[id][hundred_offset] = Object.values(dom.window.document.querySelectorAll(".ascend .episode-list-data")).map(episode => {
+            return {
+                "number": episode.querySelector("td[class='episode-number nowrap']").textContent.trim(),
+                "date": episode.querySelector("td[class='episode-aired nowrap']").textContent.trim(),
+                "title": episode.querySelector(".episode-title a").textContent.trim(),
+                "sub_title": episode.querySelector(".episode-title span").textContent.trim()
+            }
+        });
+    }
+
+    async get_episode_info(id, hundred_offset, episode) {
+        if (!this.cache[id] || !this.cache[id][hundred_offset])
+            await this.pull_episode_info(id, hundred_offset);
+
+        let info = this.cache[id][hundred_offset][episode];
         if (info)
             return info;
         else
@@ -144,12 +144,12 @@ class myanimelist {
 
 (async () => {
     try {
-        let imdbapi = new myanimelist;
-        let id = await imdbapi.find_series_id("One Punch Man");
+        let myanimelistapi = new myanimelist;
+        let id = await myanimelistapi.find_series_id("One Piece");
         console.log(id);
-        console.log(await imdbapi.get_series_info(id));
-        for(let i = 0; i < 10; ++i)
-            console.log(await imdbapi.get_episode_info(id, i));
+        console.log(await myanimelistapi.get_series_info(id));
+        for(let i = 0; i < 3; ++i)
+            console.log(await myanimelistapi.get_episode_info(id, 0, i));
     } catch (e) {
         console.log(e);
     } 
