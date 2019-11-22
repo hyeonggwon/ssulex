@@ -20,107 +20,113 @@ body {
     padding: 10px;
     border-radius: 10px;
 }
-#view {
-    display: flex;
-}
 #view.main {
+    display: flex;
     flex-wrap: wrap;
 }
-#view > nav {
+#view.main > figure {
+    width: 10%;
+}
+#view.main > figure > img {
+    opacity: 1;
+    width: 100%;
+    box-shadow: 5px 5px black;
+    transition: .1s ease-in-out;
+}
+#view.main > figure:hover > img {
+    opacity: .5;
+}
+#view.main > figure > figcaption {
+    color: white;
+    margin-top: 10px;
+    text-align: center;
+}
+#view.detail {
+    width: 1080px;
+    margin: 0 auto;
+    padding: 8px 10px 0;
+    zoom: 1;
+}
+#view.detail > #series {
+    display: flex;
+}
+#view.detail > #series > nav {
     flex: none;
     margin: 50px;
     display: flex;
     flex-flow: column;
     width: 230px;
 }
-#view > nav img {
+#view.detail > #series > nav img {
     opacity: 1;
     width: 100%;
     box-shadow: 5px 5px black;
     transition: .1s ease-in-out;
 }
-#view > nav:hover img {
+#view.detail > #series > nav:hover img {
     opacity: .5;
 }
-#view  article {
+#view.detail > #series article {
     margin: 30px;
     flex: auto;
 }
-#view > article hr {
+#view.detail > #series > article hr {
   border-width: 0px;
   background-color: #303030;
   height: 3px;
   margin-top: 20px;
   margin-bottom: 20px;
 }
-#view > article p {
+#view.detail > #series > article p {
     color: white;
     margin-block-end: 0px;
 }
-#view > article .title {
+#view.detail > #series > article .title {
     color: white;
     font-style: impact;
     font-weight: bold;
     font-size: 150%;
 }
-#view > article p.prop {
+#view.detail > #series > article p.prop {
     margin-top: 15px;
     margin-bottom: 0px;
     font-weight: bold;
     color: #999999;
 }
-#view > article p.content {
+#view.detail > #series > article p.content {
     margin-top: 5px;
     font-size: 100%;
 }
-#view > article > table {
+#view.detail > #series > article > table {
     width: 100%;
     margin-top: 10px;
 }
-#view > article > table td:nth-child(odd) {
+#view.detail > #series > article > table td:nth-child(odd) {
     padding-right: 10px;
 }
-#view > article > table.year_rating td:nth-child(odd) {
+#view.detail > #series > article > table.year_rating td:nth-child(odd) {
     text-align: left;
     color: white;
 }
-#view > article > table.year_rating td:nth-child(even) {
+#view.detail > #series > article > table.year_rating td:nth-child(even) {
     text-align: right;
     color: gray;
 }
-#view > article > table.details td:nth-child(odd) {
+#view.detail > #series > article > table.details td:nth-child(odd) {
     text-align: left;
     font-weight: bold;
     color: #999999;
 }
-#view > article > table.details td:nth-child(even) {
+#view.detail > #series > article > table.details td:nth-child(even) {
     text-align: left;
     color: white;
 }
-#view > figure {
-    width: 10%;
-}
-#view > figure > img {
-    opacity: 1;
-    width: 100%;
-    box-shadow: 5px 5px black;
-    transition: .1s ease-in-out;
-}
-#view > figure:hover > img {
-    opacity: .5;
-}
-#view > figure > figcaption {
-    color: white;
-    margin-top: 10px;
-    text-align: center;
-}
-
-#bottom {
+#view.detail > #episode {
     display: flex;
     flex-wrap: wrap;
     flex-flow: column;
 }
-#bottom > #season {
+#view.detail > #episode > section.season {
     display: flex;
     flex-wrap: wrap;
     flex-flow: column;
@@ -128,36 +134,36 @@ body {
     border: #303030;
     height: 3px;
 }
-#bottom > p.season {
+#view.detail > #episode > p.season {
     margin-left: 40px;
     margin-bottom: 0px;
     font-weight: bold;
     font-size: 120%;
     color: #777777;
 }
-#bottom > #season > figure {
+#view.detail > #episode > section.season > figure {
     margin-top: 15px;
 }
-#bottom > #season p.rating {
+#view.detail > #episode > section.season p.rating {
     padding-left: 3px;
     color: #dddddd;
     margin: 0px;
 }
-#bottom > #season p.description {
+#view.detail > #episode > section.season p.description {
     padding-left: 3px;
     color: #dddddd;
     margin: 0px;
 }
-#bottom > #season table {
+#view.detail > #episode > section.season table {
     width: 100%;
     margin-top: 10px;
 }
-#bottom > #season table td:nth-child(odd) {
+#view.detail > #episode > section.season table td:nth-child(odd) {
     padding-right: 10px;
     text-align: left;
     color: #eeceee;
 }
-#bottom > #season table td:nth-child(even) {
+#view.detail > #episode > section.season table td:nth-child(even) {
     text-align: right;
     color: gray;
 }
@@ -168,8 +174,6 @@ body {
     <input type="text" name="search" placeholder="Search" onkeydown="search(this)">
 </section>
 <section id="view" class="main">
-</section>
-<section id="bottom">
 </section>
 <script>
 let e = {
@@ -2982,6 +2986,9 @@ function show_detail(id) {
     let view = document.querySelector("#view");
     view.innerHTML = "";
     view.className = "detail";
+    let series_view = document.createElement("section");
+    series_view.id = "series";
+    series_view.innerHTML = "";
     let nav = document.createElement("nav");
     let poster = document.createElement("img");
     poster.src = s[id]["thumb_url"];
@@ -3026,7 +3033,8 @@ function show_detail(id) {
         });
       }
       else {
-        for(let index = 0; index <= 5; ++index) {
+        let size = s[id][e].length < 5 ? s[id][e].length : 5;
+        for(let index = 0; index < size; ++index) {
           if (index != 0)
             cell2.innerHTML += ", ";
           cell2.innerHTML += s[id][e][index];
@@ -3043,26 +3051,27 @@ function show_detail(id) {
     synopsis.textContent = s[id]["synopsis"];
     synopsis.className= "content";
     article.appendChild(synopsis);
-    view.appendChild(nav);
-    view.appendChild(article);
+    series_view.appendChild(nav);
+    series_view.appendChild(article);
 
-    let bottom = document.querySelector("#bottom");
-    bottom.innerHTML = "";
+    let episode_view = document.createElement("section");
+    episode_view.id = "episode"
+    episode_view.innerHTML = "";
     let season_sec = null;
     let cur_season = 0;
-    if (s[id]["episode"])
+    if (s[id]["episode"]) {
         s[id]["episode"].forEach(function(eid) {
             if(cur_season < e[eid]["season"]) {
-              let season_p = document.createElement("p");
-              season_p.className = "season";
-              season_p.textContent = "SEASON " + e[eid]["season"];
-              bottom.appendChild(season_p);
-              if(season_sec != null)
-                bottom.appendChild(season_sec);
-              season_sec = document.createElement("section");
-              season_sec.id = "season";
-              season_sec.innerHTML = "";
-              cur_season = e[eid]["season"];
+                let season_p = document.createElement("p");
+                season_p.className = "season";
+                season_p.textContent = "SEASON " + e[eid]["season"];
+                episode_view.appendChild(season_p);
+                if(season_sec != null)
+                    episode_view.appendChild(season_sec);
+                season_sec = document.createElement("section");
+                season_sec.className = "season";
+                season_sec.innerHTML = "";
+                cur_season = e[eid]["season"];
             }
             let figure = document.createElement("figure");
             table = document.createElement("table");
@@ -3082,85 +3091,14 @@ function show_detail(id) {
             e_description.textContent = e[eid]["description"];
             e_description.className = "description";
             figure.appendChild(e_description);
-/*
-            r = table.insertRow();
-            c1 = r.insertCell();
-            c1.innerHTML = e[eid]["rating"];
 
-            r = table.insertRow();
-            c1 = r.insertCell();
-            c1.innerHTML = e[eid]["description"];
-            figure.appendChild(table);
-            /*
-            let e_season = document.createElement("p");
-            e_season.textContent = e[eid]["season"];
-            figure.appendChild(e_season);
-            let e_number = document.createElement("p");
-            e_number.textContent = e[eid]["number"];
-            figure.appendChild(e_number);
-            let e_title = document.createElement("p");
-            e_title.textContent = e[eid]["title"];
-            figure.appendChild(e_title);
-            let e_date = document.createElement("p");
-            e_date.textContent = e[eid]["date"];
-            figure.appendChild(e_date);
-            */
             season_sec.appendChild(figure);
         });
-    bottom.appendChild(season_sec);
-    /*
-    let bottom = document.querySelector("#bottom"); 
-    bot_article = document.createElement("article");
-    table = document.createElement("table");
-    r = table.insertRow();
-    c1 = r.insertCell();
-    c2 = r.insertCell();
-    let c3 = r.insertCell();
-    let c4 = r.insertCell();
-    c1.innerHTML = "Season";
-    c2.innerHTML = "Episode";
-    c3.innerHTML = "Title";
-    c4.innerHTML = "Date";
-    if (s[id]["episode"])
-        s[id]["episode"].forEach(function(eid) {
-            let row = table.insertRow();
-            let cell1 = row.insertCell();
-            let cell2 = row.insertCell();
-            let cell3 = row.insertCell();
-            let cell4 = row.insertCell();
-            cell1.innerHTML = e[eid]["season"];
-            cell2.innerHTML = e[eid]["number"];
-            cell3.innerHTML = e[eid]["title"];
-            cell4.innerHTML = e[eid]["date"];
-        });
-    bot_article.appendChild(table);
-    */
-    /*
-    let table2 = document.createElement("table");
-    let r2 = table2.insertRow();
-    let c12 = r2.insertCell();
-    let c22 = r2.insertCell();
-    let c32 = r2.insertCell();
-    let c42 = r2.insertCell();
-    c12.innerHTML = "Season";
-    c22.innerHTML = "Episode";
-    c32.innerHTML = "Title";
-    c42.innerHTML = "Date";
-    if (s[id]["episode"])
-        s[id]["episode"].forEach(function(eid) {
-            let row = table.insertRow();
-            let cell1 = row.insertCell();
-            let cell2 = row.insertCell();
-            let cell3 = row.insertCell();
-            let cell4 = row.insertCell();
-            cell1.innerHTML = e[eid]["season"];
-            cell2.innerHTML = e[eid]["number"];
-            cell3.innerHTML = e[eid]["title"];
-            cell4.innerHTML = e[eid]["date"];
-        });
-        article2.appendChild(table2);
-        */
-    //bottom.appendChild(bot_article);
+        episode_view.appendChild(season_sec);
+    }
+    
+    view.appendChild(series_view);
+    view.appendChild(episode_view);
 }
 
 function redraw(filtered) {
