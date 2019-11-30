@@ -97,34 +97,56 @@ body {
     margin-top: 5px;
     font-size: 100%;
 }
-#view.detail > #series > article > table {
+.table {
+    display: table;
     width: 100%;
     margin-top: 10px;
 }
-#view.detail > #series > article > table td:nth-child(odd) {
-    padding-right: 10px;
+.row {
+  display: table-row;
 }
-#view.detail > #series > article > table.year_rating td:nth-child(odd) {
+.cell {
+  display: table-cell;
+  padding: 3px;
+}
+#view.detail > #series > article > #year_rating .col1 {
     text-align: left;
     color: white;
+    width: 20%;
 }
-#view.detail > #series > article > table.year_rating td:nth-child(even) {
+#view.detail > #series > article > #year_rating .col2 {
     text-align: right;
     color: gray;
+    width: 80%;
 }
-#view.detail > #series > article > table.details td:nth-child(odd) {
+#view.detail > #series > article > #details .col1 {
     text-align: left;
     font-weight: bold;
     color: #999999;
+    width: 20%;
 }
-#view.detail > #series > article > table.details td:nth-child(even) {
+#view.detail > #series > article > #details .col2 {
     text-align: left;
     color: white;
+    width: 80%;
 }
 #view.detail > #episode {
     display: flex;
     flex-wrap: wrap;
     flex-flow: column;
+}
+#view.detail > #episode figure {
+    margin-block-start: 0px;
+    margin-bottom: 3px;
+}
+#view.detail > #episode .odd {
+    background-color: #363636;
+}
+#view.detail > #episode .even {
+    background-color: #3c3c3c;
+}
+#view.detail > #episode figure:hover {
+    opacity: .5;
 }
 #view.detail > #episode > section.season {
     display: flex;
@@ -141,7 +163,7 @@ body {
     font-size: 120%;
     color: #777777;
 }
-#view.detail > #episode > section.season > figure {
+#view.detail > #episode > section.season {
     margin-top: 15px;
 }
 #view.detail > #episode > section.season p.rating {
@@ -154,18 +176,16 @@ body {
     color: #dddddd;
     margin: 0px;
 }
-#view.detail > #episode > section.season table {
-    width: 100%;
-    margin-top: 10px;
-}
-#view.detail > #episode > section.season table td:nth-child(odd) {
+#view.detail > #episode > section.season .table .col1 {
     padding-right: 10px;
     text-align: left;
     color: #eeceee;
+    width: 80%;
 }
-#view.detail > #episode > section.season table td:nth-child(even) {
+#view.detail > #episode > section.season .table .col2 {
     text-align: right;
     color: gray;
+    width: 20%;
 }
 </style>
 </head>
@@ -2924,64 +2944,6 @@ let s = {
   }
 };
 
-/*
-function show_detail(id) {
-    let view = document.querySelector("#view");
-    view.innerHTML = "";
-    view.className = "detail";
-    let nav = document.createElement("nav");
-    let poster = document.createElement("img");
-    poster.src = s[id]["thumb_url"];
-    nav.appendChild(poster);
-    let title = document.createElement("p");
-    title.textContent = s[id]["title"];
-    title.className = "center";
-    nav.appendChild(title);
-    let year = document.createElement("p");
-    year.textContent = s[id]["year"];
-    year.className = "center";
-    nav.appendChild(year);
-    let genre = document.createElement("p")
-    genre.className = "center";
-    s[id]["genres"].forEach(function(element, index) {
-        if (index != 0)
-            genre.textContent += ", ";
-        genre.textContent += element;
-    });
-    nav.appendChild(genre);
-    let synopsis = document.createElement("p");
-    synopsis.textContent = s[id]["synopsis"];
-    synopsis.className= "center";
-    nav.appendChild(synopsis);
-    let article = document.createElement("article");
-    let table = document.createElement("table");
-    let r = table.insertRow();
-    let c1 = r.insertCell();
-    let c2 = r.insertCell();
-    let c3 = r.insertCell();
-    let c4 = r.insertCell();
-    c1.innerHTML = "Season";
-    c2.innerHTML = "Episode";
-    c3.innerHTML = "Title";
-    c4.innerHTML = "Date";
-    if (s[id]["episode"])
-        s[id]["episode"].forEach(function(eid) {
-            let row = table.insertRow();
-            let cell1 = row.insertCell();
-            let cell2 = row.insertCell();
-            let cell3 = row.insertCell();
-            let cell4 = row.insertCell();
-            cell1.innerHTML = e[eid]["season"];
-            cell2.innerHTML = e[eid]["number"];
-            cell3.innerHTML = e[eid]["title"];
-            cell4.innerHTML = e[eid]["date"];
-        });
-    article.appendChild(table);
-    view.appendChild(nav);
-    view.appendChild(article);
-}
-*/
-
 function show_detail(id) {
     let view = document.querySelector("#view");
     view.innerHTML = "";
@@ -2995,35 +2957,49 @@ function show_detail(id) {
     nav.appendChild(poster);
     let article = document.createElement("article");
 
-    let table = document.createElement("table");
-    let r = table.insertRow();
-    let c1 = r.insertCell();
-    let c2 = r.insertCell();
+    let title = document.createElement("div");
+    title.className = "table";
+    let r = document.createElement("div");
+    r.className = "row";
+    let c1 = document.createElement("div");
     c1.innerHTML = s[id]["title"];
-    c1.className = "title";
-    article.appendChild(table);
+    c1.className = "cell title";
+    r.appendChild(c1);
+    title.appendChild(r);
+    article.appendChild(title);
 
-    table = document.createElement("table");
-    table.className = "year_rating";
-    r = table.insertRow();
-    c1 = r.insertCell();
-    c2 = r.insertCell();
+    let year_rating = document.createElement("div");
+    year_rating.id = "year_rating";
+    year_rating.className = "table";
+    r = document.createElement("div");
+    r.className = "row"
+    c1 = document.createElement("div");
+    c1.className = "cell col1";
+    let c2 = document.createElement("div");
+    c2.className = "cell col2"
     c1.innerHTML = s[id]["year"];
     c2.innerHTML = "RATE : " + s[id]["rating"];
-    article.appendChild(table);
+    r.appendChild(c1);
+    r.appendChild(c2);
+    year_rating.appendChild(r);
+    article.appendChild(year_rating);
 
     let br = document.createElement("hr");
     article.appendChild(br);
 
-    table = document.createElement("table");
-    table.className = "details";
+    let details = document.createElement("div");
+    details.id = "details";
+    details.className = "table";
     let props = ["genres", "directors", "actors"];
     let viewed_props = ["GENRES", "DIRECTED BY", "ACTORS"];
     let BreakException = {};
     props.forEach(function(e, i) {
-      let row = table.insertRow();
-      let cell1 = row.insertCell();
-      let cell2 = row.insertCell();
+      let row = document.createElement("div");
+      row.className = "row";
+      let cell1 = document.createElement("div");
+      cell1.className = "cell col1";
+      let cell2 = document.createElement("div");
+      cell2.className = "cell col2";
       cell1.innerHTML = viewed_props[i];
       if(i == 0) {
         s[id][e].forEach(function(element, index) {
@@ -3040,8 +3016,11 @@ function show_detail(id) {
           cell2.innerHTML += s[id][e][index];
         }
       }
+      row.appendChild(cell1);
+      row.appendChild(cell2);
+      details.appendChild(row);
     });
-    article.appendChild(table);
+    article.appendChild(details);
 
     let synopsis_prop = document.createElement("p");
     synopsis_prop.textContent = "SYNOPSIS";
@@ -3060,6 +3039,7 @@ function show_detail(id) {
     let season_sec = null;
     let cur_season = 0;
     if (s[id]["episode"]) {
+        let i = 1;
         s[id]["episode"].forEach(function(eid) {
             if(cur_season < e[eid]["season"]) {
                 let season_p = document.createElement("p");
@@ -3074,13 +3054,24 @@ function show_detail(id) {
                 cur_season = e[eid]["season"];
             }
             let figure = document.createElement("figure");
-            table = document.createElement("table");
-            r = table.insertRow();
-            c1 = r.insertCell();
-            c2 = r.insertCell();
+            if(i % 2 == 0)
+              figure.className = "even";
+            else
+              figure.className = "odd";
+            let title_rating = document.createElement("div");
+            title_rating.className = "table";
+            r = document.createElement("div");
+            r.className = "row";
+            c1 = document.createElement("div");
+            c1.className = "cell col1"
+            c2 = document.createElement("div");
+            c2.className = "cell col2"
             c1.innerHTML = e[eid]["title"];
             c2.innerHTML = e[eid]["date"];
-            figure.appendChild(table);
+            r.appendChild(c1);
+            r.appendChild(c2);
+            title_rating.appendChild(r);
+            figure.appendChild(title_rating);
 
             let e_rating = document.createElement("p");
             e_rating.textContent = e[eid]["rating"];
@@ -3093,6 +3084,7 @@ function show_detail(id) {
             figure.appendChild(e_description);
 
             season_sec.appendChild(figure);
+            ++i;
         });
         episode_view.appendChild(season_sec);
     }
